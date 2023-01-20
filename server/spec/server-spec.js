@@ -8,20 +8,22 @@ const API_URL = 'http://127.0.0.1:3000/classes';
 
 describe('Persistent Node Chat Server', () => {
   const dbConnection = mysql.createConnection({
-    user: 'student',
-    password: 'student',
+    user: 'root',
+    password: '',
     database: 'chat',
   });
 
   beforeAll((done) => {
     dbConnection.connect();
 
-       const tablename = ''; // TODO: fill this out
+    const tablename = 'messages'; // TODO: fill this out
+    //const table2name = 'users';
 
     /* Empty the db table before all tests so that multiple tests
      * (or repeated runs of the tests)  will not fail when they should be passing
      * or vice versa */
     dbConnection.query(`truncate ${tablename}`, done);
+    //dbConnection.query(`truncate ${table2name}`, done);
   }, 6500);
 
   afterAll(() => {
@@ -35,6 +37,7 @@ describe('Persistent Node Chat Server', () => {
     // Create a user on the chat server database.
     axios.post(`${API_URL}/users`, { username })
       .then(() => {
+        console.log('hello');
         // Post a message to the node chat server:
         return axios.post(`${API_URL}/messages`, { username, message, roomname });
       })
@@ -54,7 +57,7 @@ describe('Persistent Node Chat Server', () => {
           expect(results.length).toEqual(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).toEqual(message);
+          expect(results[0].message).toEqual(message);
           done();
         });
       })
@@ -65,8 +68,8 @@ describe('Persistent Node Chat Server', () => {
 
   it('Should output all messages from the DB', (done) => {
     // Let's insert a message into the db
-       const queryString = '';
-       const queryArgs = [];
+    const queryString = '';
+    const queryArgs = [];
     /* TODO: The exact query string and query args to use here
      * depend on the schema you design, so I'll leave them up to you. */
     dbConnection.query(queryString, queryArgs, (err) => {

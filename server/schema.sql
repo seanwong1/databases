@@ -12,17 +12,10 @@ CREATE TABLE users (
 CREATE TABLE messages (
   /* Describe your table here. varchar(20)*/
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  user_id INTEGER,
-  messages varchar(260),
-  FOREIGN KEY(user_id) REFERENCES users(id)
-
-/* CREATE TABLE classes (
-  id INTEGER PRIMARY KEY,
-  name TEXT NOT NULL,
-  department INTEGER,
-  teacher INTEGER,
-  FOREIGN KEY(department) REFERENCES departments(id),
-  FOREIGN KEY(teacher) REFERENCES teachers(id) */
+  -- user_id INTEGER,
+  username varchar(20),
+  message varchar(260)
+  -- FOREIGN KEY(user_id) REFERENCES users(id)
 
 );
 
