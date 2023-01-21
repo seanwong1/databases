@@ -12,13 +12,15 @@ CREATE TABLE users (
 CREATE TABLE messages (
   /* Describe your table here. varchar(20)*/
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  -- user_id INTEGER,
+  message varchar(260),
   username varchar(20),
-  message varchar(260)
-  -- FOREIGN KEY(user_id) REFERENCES users(id)
+  user_id INTEGER,
+  FOREIGN KEY(user_id) REFERENCES users(id)
 
 );
+insert into users (username) values('jake'), ('josh'), ('jack');
 
+insert into messages (message, username, user_id) values ('Hello, World!', 'jake', 1 ), ('Goodbye, World!', 'josh', 2)
 /* Create other tables and define schemas for them here! */
 
 
